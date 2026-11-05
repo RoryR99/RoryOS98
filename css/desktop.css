@@ -1,0 +1,347 @@
+/* Desktop, icons, taskbar, Start menu, menus, boot and full-screen sequences. */
+#desktop {
+  position: fixed;
+  inset: 0 0 var(--taskbar-h) 0;
+  overflow: hidden;
+  touch-action: none;
+}
+#wallpaper { position: absolute; inset: 0; background: var(--teal) center / cover no-repeat; image-rendering: pixelated; }
+#icons { position: absolute; inset: 0; }
+
+.d-icon {
+  position: absolute;
+  width: 84px;
+  padding: 3px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: 0;
+  color: #fff;
+  cursor: var(--cur-arrow);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.d-icon img { width: 32px; height: 32px; pointer-events: none; }
+.d-icon .lbl {
+  padding: 0 3px;
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: 1px 1px 0 #000;
+  border: 1px dotted transparent;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.d-icon.selected img { filter: brightness(.55) sepia(1) hue-rotate(190deg) saturate(5); }
+.d-icon.selected .lbl { background: var(--sel); text-shadow: none; }
+.d-icon:focus-visible { outline: none; }
+.d-icon:focus-visible .lbl { border-color: #fff; }
+.d-icon.dragging { opacity: .75; z-index: 5; }
+.d-icon.flash { visibility: hidden; }
+
+/* The hidden folder and the wallpaper floppy: findable but not shouting. */
+.d-icon.hidden-item { opacity: .1; transition: opacity .15s; }
+.d-icon.hidden-item:hover, .d-icon.hidden-item:focus-visible, .d-icon.hidden-item.selected, body.show-hidden .d-icon.hidden-item { opacity: .85; }
+.desk-floppy {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  padding: 2px;
+  background: none;
+  border: 0;
+  opacity: .28;
+  cursor: var(--cur-hand);
+  transition: opacity .15s;
+}
+.desk-floppy:hover, .desk-floppy:focus-visible { opacity: 1; }
+.desk-floppy img { width: 16px; height: 16px; }
+
+#marquee { position: absolute; border: 1px dotted #fff; mix-blend-mode: difference; pointer-events: none; z-index: 1; }
+
+/* Taskbar */
+#taskbar {
+  position: fixed;
+  inset: auto 0 0 0;
+  height: var(--taskbar-h);
+  background: var(--face);
+  box-shadow: inset 0 1px var(--lt), inset 0 2px var(--hi);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 3px 2px;
+  z-index: 15000;
+  padding-bottom: max(2px, env(safe-area-inset-bottom));
+}
+.tb-btn {
+  background: var(--face);
+  border: 0;
+  box-shadow: var(--out);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px;
+  cursor: var(--cur-hand);
+  min-width: 0;
+}
+.tb-btn:active, .tb-btn.pressed { box-shadow: var(--press); padding: 1px 5px 0 7px; }
+#start-btn { flex: none; }
+#start-logo img { width: 16px; height: 16px; }
+#xp-meter {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  padding: 0 5px;
+  background: var(--face);
+  border: 0;
+  box-shadow: var(--etched);
+  cursor: var(--cur-hand);
+}
+#xp-level { font-weight: bold; white-space: nowrap; }
+#xp-meter.bump { background: var(--tip); }
+#task-buttons {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  gap: 3px;
+  overflow: hidden;
+}
+#task-buttons .tb-btn { flex: 0 1 150px; justify-content: flex-start; overflow: hidden; }
+#task-buttons .tb-btn span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#task-buttons .tb-btn img { width: 16px; height: 16px; }
+#task-buttons .tb-btn.active {
+  box-shadow: var(--press);
+  font-weight: bold;
+  background: repeating-conic-gradient(var(--face) 0 25%, var(--hi) 0 50%) 0 0 / 2px 2px;
+}
+#tray {
+  flex: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 6px 0 4px;
+  box-shadow: var(--etched);
+}
+#tray button {
+  background: none;
+  border: 0;
+  padding: 1px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  cursor: var(--cur-hand);
+  white-space: nowrap;
+}
+#tray img { width: 16px; height: 16px; }
+#tray-clock { padding-left: 4px !important; font-variant-numeric: tabular-nums; }
+
+/* Menus: context, menubar and Start share this */
+.menu {
+  position: fixed;
+  z-index: 16000;
+  background: var(--face);
+  box-shadow: var(--out);
+  padding: 3px;
+  min-width: 150px;
+  max-height: calc(100vh - 8px);
+  overflow-y: auto;
+  animation: menu-in .08s steps(3);
+  user-select: none;
+}
+@keyframes menu-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 20px;
+  padding: 2px 18px 2px 6px;
+  background: none;
+  border: 0;
+  text-align: left;
+  position: relative;
+  cursor: var(--cur-hand);
+  white-space: nowrap;
+}
+.menu-item img { width: 16px; height: 16px; }
+.menu-item .tick { width: 12px; flex: none; text-align: center; }
+.menu-item.has-sub::after { content: ""; position: absolute; right: 6px; top: 50%; margin-top: -4px; border: 4px solid transparent; border-left-color: currentColor; border-right: 0; }
+.menu-item:hover:not(:disabled), .menu-item:focus-visible, .menu-item.open { background: var(--sel); color: var(--sel-ink); outline: none; }
+.menu-item:disabled { color: var(--sh); text-shadow: 1px 1px 0 var(--hi); cursor: var(--cur-arrow); }
+.menu-sep { height: 2px; margin: 3px 1px; box-shadow: inset 0 1px var(--sh), inset 0 -1px var(--hi); }
+
+/* Start menu */
+.menu.start { padding: 3px 3px 3px 27px; min-width: 190px; animation: start-in .1s steps(4); }
+@keyframes start-in { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+.menu.start::before {
+  content: "RoryOS 98";
+  position: absolute;
+  left: 3px; top: 3px; bottom: 3px;
+  width: 22px;
+  background: linear-gradient(0deg, var(--title-a), var(--title-b));
+  color: #fff;
+  font: bold 15px/22px Arial, sans-serif;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 6px 0 0;
+  text-align: left;
+}
+.menu.start > .menu-item { min-height: 32px; font-size: 12px; }
+.menu.start > .menu-item img { width: 24px; height: 24px; }
+
+/* Toasts */
+#toasts {
+  position: fixed;
+  right: 8px;
+  bottom: calc(var(--taskbar-h) + 8px);
+  z-index: 20000;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: min(280px, calc(100vw - 16px));
+  pointer-events: none;
+}
+.toast {
+  background: var(--face);
+  box-shadow: var(--out), 2px 2px 0 rgba(0,0,0,.3);
+  padding: 3px;
+  pointer-events: auto;
+  animation: toast-in .18s steps(5);
+}
+.toast.leaving { animation: toast-out .15s steps(4) forwards; }
+@keyframes toast-in { from { transform: translateY(16px); opacity: 0; } }
+@keyframes toast-out { to { transform: translateX(16px); opacity: 0; } }
+.toast-title {
+  background: linear-gradient(90deg, var(--title-a), var(--title-b));
+  color: #fff;
+  font-weight: bold;
+  padding: 2px 4px;
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+.toast-title button { background: var(--face); box-shadow: var(--out); border: 0; width: 16px; height: 14px; line-height: 10px; padding: 0; font-weight: bold; color: var(--ink); cursor: var(--cur-hand); }
+.toast-body { display: flex; gap: 8px; padding: 6px 5px; align-items: flex-start; }
+.toast-body img { width: 32px; height: 32px; }
+.toast-body b { display: block; }
+#xp-floats { position: fixed; left: 80px; bottom: calc(var(--taskbar-h) + 2px); z-index: 19000; pointer-events: none; }
+.xp-float {
+  position: absolute;
+  left: 0; bottom: 0;
+  white-space: nowrap;
+  background: var(--tip);
+  border: 1px solid var(--ink);
+  padding: 1px 5px;
+  font-weight: bold;
+  animation: xp-float 1.5s steps(14) forwards;
+}
+@keyframes xp-float { 0% { transform: translateY(6px); opacity: 0; } 12% { opacity: 1; transform: none; } 75% { opacity: 1; } 100% { transform: translateY(-34px); opacity: 0; } }
+
+/* Boot */
+.fs-screen { position: fixed; inset: 0; z-index: 30000; background: #000; color: #c0c0c0; font: 14px/1.35 var(--mono); overflow: hidden; }
+.boot-bios { padding: 18px; white-space: pre-wrap; word-break: break-word; }
+.boot-skip {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  background: #000;
+  color: #c0c0c0;
+  border: 1px solid #808080;
+  padding: 6px 12px;
+  font: inherit;
+  cursor: var(--cur-hand);
+}
+.boot-skip:hover, .boot-skip:focus-visible { background: #c0c0c0; color: #000; outline: none; }
+.boot-splash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #000060 0%, #1058b0 60%, #5a9bd4 78%, #e8a860 92%, #f3d27a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #fff;
+  font-family: var(--font);
+  image-rendering: pixelated;
+}
+.boot-logo { display: flex; align-items: center; gap: 14px; }
+.boot-logo img { width: 72px; height: 72px; }
+.boot-logo h1 { font: bold 44px/1 Arial, Helvetica, sans-serif; letter-spacing: -1px; text-shadow: 3px 3px 0 #000040; }
+.boot-logo h1 sup { font-size: 22px; font-weight: normal; }
+.boot-tag { font-size: 13px; }
+.boot-splash .progress { width: min(320px, 76vw); }
+.boot-status { min-height: 18px; }
+
+/* Shutdown */
+.shutdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+  color: #ff9a20;
+  font: bold 24px/1.3 Arial, Helvetica, sans-serif;
+}
+.shutdown small { display: block; font: 13px/1.4 var(--mono); color: #c0c0c0; max-width: 520px; }
+.shutting { display: flex; align-items: center; justify-content: center; height: 100%; background: #000080; color: #fff; font: 18px var(--font); }
+
+/* Fake crash screen */
+.crash { background: #0000aa; color: #fff; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; font: 15px/1.5 var(--mono); }
+.crash > div { max-width: 640px; }
+.crash h2 { background: #aaa; color: #0000aa; display: table; margin: 0 auto 18px; padding: 0 10px; font: inherit; font-weight: bold; }
+
+/* Matrix */
+.matrix-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.matrix-hint { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; color: #5f5; font: 12px var(--mono); }
+
+@media (max-width: 720px), (max-height: 480px) {
+  #desktop { touch-action: auto; }
+  #icons {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    grid-auto-rows: max-content;
+    gap: 8px 4px;
+    padding: 12px 8px 40px;
+    touch-action: pan-y;
+  }
+  .d-icon { position: static !important; width: 100%; padding: 8px 2px; touch-action: manipulation; }
+  .d-icon img { width: 48px; height: 48px; }
+  .d-icon .lbl { font-size: 12px; padding: 0; }
+  .d-icon.hidden-item { opacity: .22; }
+  .desk-floppy { right: 8px; bottom: 8px; padding: 8px; opacity: .4; }
+  .desk-floppy img { width: 24px; height: 24px; }
+  #taskbar { gap: 3px; }
+  #start-btn { padding: 0 8px; }
+  #start-btn b { font-size: 14px; }
+  #start-logo img { width: 20px; height: 20px; }
+  #xp-meter { padding: 0 6px; }
+  #xp-meter .progress { display: none; }
+  #task-buttons { overflow-x: auto; scrollbar-width: none; }
+  #task-buttons::-webkit-scrollbar { display: none; }
+  #task-buttons .tb-btn { flex: 0 0 40px; justify-content: center; padding: 0; }
+  #task-buttons .tb-btn span { display: none; }
+  #task-buttons .tb-btn img { width: 22px; height: 22px; }
+  #tray { padding: 0 4px; }
+  #tray img { width: 18px; height: 18px; }
+  .menu { max-width: calc(100vw - 8px); }
+  .menu-item { min-height: 40px; font-size: 15px; white-space: normal; }
+  .menu-item img { width: 22px; height: 22px; }
+  .menu.start > .menu-item { font-size: 15px; min-height: 44px; }
+  #xp-floats { left: 60px; }
+  .boot-logo h1 { font-size: 32px; }
+  .boot-logo img { width: 52px; height: 52px; }
+  .fs-screen { font-size: 12px; }
+}

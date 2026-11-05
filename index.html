@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>RoryOS 98 | Rory Rampersad</title>
+  <meta name="description" content="The portfolio of Rory Rampersad, Business Intelligence Analyst, delivered as a playable retro desktop operating system: projects, experience, skills, resume, quests and mini-games.">
+  <meta name="theme-color" content="#008080">
+  <meta property="og:title" content="RoryOS 98 | Rory Rampersad">
+  <meta property="og:description" content="I came here to look at a resume, but somehow I've spent 10 minutes exploring this person's computer.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="css/windows.css">
+  <link rel="stylesheet" href="css/games.css">
+  <noscript><style>
+    #static-resume { position: fixed; inset: 40px 0 0; left: 0; width: auto; height: auto; overflow: auto; background: #fff; padding: 16px; font-size: 14px; z-index: 4; }
+    #taskbar { display: none; }
+  </style></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#static-resume">Skip to plain-text profile</a>
+
+  <main id="desktop" aria-label="RoryOS 98 desktop">
+    <div id="wallpaper" aria-hidden="true"></div>
+    <div id="icons" role="group" aria-label="Desktop icons"></div>
+  </main>
+
+  <nav id="taskbar" aria-label="Taskbar">
+    <button id="start-btn" class="tb-btn" type="button" aria-haspopup="menu" aria-expanded="false" data-tip="Click here to begin.">
+      <span id="start-logo"></span><b>Start</b>
+    </button>
+    <button id="xp-meter" type="button" aria-label="Visitor level and XP" data-tip="Your visitor level. Click for your profile.">
+      <span id="xp-level">Lv 1</span>
+      <span class="progress mini" aria-hidden="true"><span id="xp-fill"></span></span>
+    </button>
+    <div id="task-buttons" role="group" aria-label="Open windows"></div>
+    <div id="tray">
+      <button id="tray-floppy" type="button" hidden aria-label="Floppy disks collected"></button>
+      <button id="tray-sound" type="button" aria-label="Toggle sound"></button>
+      <button id="tray-clock" type="button" aria-label="System clock"></button>
+    </div>
+  </nav>
+
+  <div id="toasts" aria-live="polite"></div>
+  <div id="xp-floats" aria-hidden="true"></div>
+  <div id="tooltip" role="tooltip" hidden></div>
+  <div id="fullscreen-root"></div>
+
+  <noscript>
+    <div class="noscript-note">RoryOS 98 needs JavaScript to boot. The essentials are below.</div>
+  </noscript>
+
+  <!-- Plain profile for screen-reader skip link, search engines and no-JS visitors. Hidden visually once the OS boots. -->
+  <section id="static-resume" tabindex="-1">
+    <h1>Rory Rampersad</h1>
+    <p>Business Intelligence Analyst. Bachelor of Mathematics and Business Administration (Honours), Computing Minor, University of Waterloo.</p>
+    <ul>
+      <li><a href="mailto:roryrampersad@outlook.com">roryrampersad@outlook.com</a></li>
+      <li><a href="https://linkedin.com/in/roryrampersad/" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/RoryR99" rel="noopener">GitHub</a></li>
+      <li><a href="assets/resume/Rory_Rampersad_Resume.pdf">Resume (PDF)</a></li>
+    </ul>
+    <p>Experience: Business Intelligence Analyst, SM Jaleel &amp; Co. Ltd. (Sept 2025 to present); Project Support Officer, Ministry of Digital Transformation of Trinidad and Tobago (Oct 2023 to Nov 2024); Software Developer Intern, SuperPharm Ltd. (Aug 2023 to Oct 2023).</p>
+  </section>
+
+  <script src="js/core.js" defer></script>
+  <script src="js/icons.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/windowManager.js" defer></script>
+  <script src="js/gamification.js" defer></script>
+  <script src="js/achievements.js" defer></script>
+  <script src="js/quests.js" defer></script>
+  <script src="js/desktop.js" defer></script>
+  <script src="js/startMenu.js" defer></script>
+  <script src="js/applications.js" defer></script>
+  <script src="js/terminal.js" defer></script>
+  <script src="js/games.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

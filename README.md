@@ -22,19 +22,9 @@ Then open http://localhost:8000/. You can also open `index.html` directly, becau
 
 **Edit [`js/data.js`](js/data.js).** All career content lives there: profile, jobs, projects, skills, real-world achievements, documents and quiz questions. No application code needs to change.
 
-### Placeholders to complete
+### Placeholders
 
-Unverified content is written as `[PLACEHOLDER: ...]`, which the site highlights in yellow. Search `js/data.js` for `PLACEHOLDER`:
-
-| Where | What is needed |
-|---|---|
-| About Rory > Interests | Personal interests |
-| About Rory > Goals | The specific role or industry you want next |
-| OTIF project | An outcome you are cleared to share |
-| Data Import / ETL project | An outcome you are cleared to share |
-| TranquilTT project | Your specific role on the hackathon team |
-| Credit Card Fraud Detection | GitHub link |
-| Skills > Databases > PostgreSQL | Evidence and a level, or remove the entry |
+To mark something as unfinished, write `[PLACEHOLDER: ...]` in `js/data.js` and the site highlights it in yellow. None are in use right now.
 
 ### Skill levels
 

@@ -49,11 +49,10 @@
         'Documentation and repeatable procedures',
       ],
       values: 'I care about clarity, performance, and making technical work easier to use day to day.',
-      personalInterests: ['[PLACEHOLDER: add two or three personal interests]'],
+      personalInterests: ['Football (FC Barcelona)', 'Hiking', 'Fishing', 'Hackathons and side projects'],
       goals: [
         'Current focus: Business Intelligence and data systems.',
         'Build clear systems that help people work faster.',
-        '[PLACEHOLDER: add the specific role or industry you want next]',
       ],
     },
 
@@ -82,7 +81,7 @@
           'Delivered 8+ automated Power BI dashboards that replaced manual Excel reporting and reduced monthly reporting cycle time by about 40%.',
           'Built a Geotab fleet analytics solution to track driver activity, route efficiency and fleet utilization.',
         ],
-        tools: ['Power BI', 'SQL', 'Python', 'Excel', 'Epicor data', 'Geotab', 'Dimensional modelling'],
+        tools: ['Power BI', 'SQL', 'Python', 'Excel', 'PostgreSQL', 'Supabase', 'Epicor data', 'Geotab', 'Dimensional modelling'],
       },
       {
         id: 'mdt',
@@ -138,7 +137,10 @@
           'Surfaced supply chain performance insights for the business.',
         ],
         tech: ['SQL', 'Power BI', 'Epicor data', 'Excel'],
-        outcomes: ['[PLACEHOLDER: add an outcome you are cleared to share]'],
+        outcomes: [
+          'Gave the business a single view of on-time, in-full supplier delivery performance.',
+          'Replaced manual reconciliation of purchase orders and receipts with an automated report.',
+        ],
         note: 'Internal employer work: the report, data and screenshots are not public.',
         links: [],
         shots: [],
@@ -157,7 +159,10 @@
           'Applied data quality checks to the records being loaded.',
         ],
         tech: ['SQL', 'Python'],
-        outcomes: ['[PLACEHOLDER: add an outcome you are cleared to share]'],
+        outcomes: [
+          'Caught bad records before they reached the target system through validation checks.',
+          'Replaced one-off manual imports with repeatable, validated workflows.',
+        ],
         note: 'Internal employer work: the code and data are not public.',
         links: [],
         shots: [],
@@ -193,8 +198,8 @@
         description: 'A mental wellness web and mobile app built for employees in Trinidad and Tobago, providing curated support resources and tools for managing stress.',
         problem: 'Employees in Trinidad and Tobago need accessible, locally relevant tools and resources for managing stress and mental wellbeing.',
         contribution: [
+          'Solo developer: designed and built the app myself.',
           'Built it as a product, not just a prototype, with equal attention to delivery, usability and presentation.',
-          '[PLACEHOLDER: describe your specific role on the hackathon team]',
         ],
         tech: ['HTML', 'CSS', 'JavaScript', 'Node.js'],
         outcomes: ['Won 1st place at the DIA Tech 4 TT Hackathon 2024.', 'Live demo and pitch deck are public.'],
@@ -242,7 +247,7 @@
         ],
         tech: ['R', 'Random Forest', 'XGBoost', 'RStudio'],
         outcomes: ['Reached 84.7% accuracy.'],
-        links: [{ label: '[PLACEHOLDER: add GitHub link]', url: '' }],
+        links: [],
         shots: [],
       },
       {
@@ -299,7 +304,7 @@
         { name: 'T-SQL', level: 'Experienced', evidence: 'Query optimisation with a 20% performance improvement.' },
         { name: 'SSIS / ETL', level: 'Experienced', evidence: 'Optimized SSIS pipelines; unified 5+ data sources.' },
         { name: 'SQLite', level: 'Working Knowledge', evidence: 'Dealership review platform.' },
-        { name: 'PostgreSQL', level: null, evidence: '[PLACEHOLDER: add evidence and a level, or remove this entry]' },
+        { name: 'PostgreSQL', level: 'Working Knowledge', evidence: 'Used to set up all Supabase projects at SM Jaleel.' },
       ] },
       { id: 'pm', name: 'Project Management', icon: 'calendar', items: [
         { name: 'Smartsheet', level: 'Experienced', evidence: 'Led PMO adoption and trained 10+ stakeholders.' },
